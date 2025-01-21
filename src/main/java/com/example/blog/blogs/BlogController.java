@@ -1,9 +1,11 @@
 package com.example.blog.blogs;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -14,19 +16,23 @@ public class BlogController {
         this.blogService = blogService;
     }
 
-    @PostMapping(path = "/blogs")
-    public Blog PostBlog(@RequestBody Blog blog){
-        System.out.println("Blog from body"+blog);
-        return blogService.SaveBlog(blog);
+
+
+    @PostMapping(path = "/blog")
+    public blogDto PostBlog(@Valid @RequestBody blogDto blogdto){
+        return blogService.SaveBlog(blogdto);
+    }
+    public List<blogDto> PostBlog(@Valid @RequestBody List<blogDto> blogdto){
+        return blogService.SaveBlogs(blogdto);
     }
 
     @GetMapping(path = "/blogs")
-    public List<Blog> GetBlogs(){
+    public List<blogDto> GetBlogs(){
         return blogService.getBlogs();
     }
 
     @GetMapping(path = "/blogs/{BlogID}")
-    public Blog getBlog(@PathVariable Integer BlogID){
+    public blogDto getBlog(@PathVariable Integer BlogID){
         return blogService.getBlog(BlogID);
     }
 

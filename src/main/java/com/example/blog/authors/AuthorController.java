@@ -1,5 +1,6 @@
 package com.example.blog.authors;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +19,21 @@ public class AuthorController {
     }
 
     @PostMapping(path = "/Author")
-    public Author postAuthor(@RequestBody Author author){
-        return authorService.saveAuthor(author);
+    public AuthorDto postAuthor(@Valid @RequestBody AuthorDto authorDto){
+        return authorService.saveAuthor(authorDto);
     }
     @PostMapping(path = "/Authors")
-    public List<Author> postAuthors(@RequestBody List<Author> authors){
-        return authorService.saveAuthors(authors);
+    public List<AuthorDto> postAuthors(@RequestBody List<AuthorDto> authorsDto){
+        return authorService.saveAuthors(authorsDto);
     }
 
     @GetMapping(path = "/Authors")
-    public List<Author> getAuthors(){
+    public List<AuthorResponseDto> getAuthors(){
         return authorService.getAuthors();
     }
 
     @GetMapping(path = "/Authors/{AuthorID}")
-    public Author getAuthor(@PathVariable Integer AuthorID){
+    public AuthorResponseDto getAuthor(@PathVariable Integer AuthorID){
         return authorService.getAuthor(AuthorID);
     }
 
