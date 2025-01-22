@@ -1,10 +1,12 @@
 package com.example.blog.authors;
 
+import com.example.blog.blogs.Blog;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +25,11 @@ public class AuthorService {
     }
 
     public AuthorResponseDto authorMapper(Author author){
-        return new AuthorResponseDto(author.getName(),author.getEmail(),author.getDob(),author.getNoOfBlogs());
+        ArrayList<String> Titles = new ArrayList<>();
+        for(Blog blog:author.getBlogs()){
+            Titles.add(blog.getTitle());
+        }
+        return new AuthorResponseDto(author.getName(),author.getEmail(),author.getDob(),author.getNoOfBlogs(),Titles);
     }
 
 
@@ -46,9 +52,10 @@ public class AuthorService {
     public AuthorResponseDto getAuthor(Integer AuthorID){
         Optional<Author> optional = authorRepository.findById(AuthorID);
         if (optional.isPresent()) {
+            Author author = optional.get();
             return authorMapper(optional.get());
         }else {
-            return  new AuthorResponseDto("N/A","N/A",LocalDate.MIN,-1);
+            return  new AuthorResponseDto("N/A","N/A",LocalDate.MIN,-1,new ArrayList<String>());
         }
     }
 
@@ -57,4 +64,7 @@ public class AuthorService {
         return "Author " + authorID +" IsDeleted";
     }
 
+    public List<AuthorResponseDto> getAuthorByName(String author) {
+        return authorRepository.findByname(author).stream().map(author1 -> authorMapper(author1)).toList();
+    }
 }

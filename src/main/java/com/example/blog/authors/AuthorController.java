@@ -37,6 +37,12 @@ public class AuthorController {
         return authorService.getAuthor(AuthorID);
     }
 
+    @GetMapping(path = "/Author")
+    public List<AuthorResponseDto> getAuthorByName(@RequestParam("AuthorName") String author){
+        return authorService.getAuthorByName(author);
+    }
+
+
     @DeleteMapping(path = "/Authors/{AuthorID}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String deleteAuthor(@PathVariable Integer AuthorID){

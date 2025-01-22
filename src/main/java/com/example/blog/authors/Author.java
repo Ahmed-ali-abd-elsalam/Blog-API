@@ -1,18 +1,20 @@
 package com.example.blog.authors;
 
+import com.example.blog.blogs.Blog;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.transaction.Transactional;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
+@Transactional
 public class Author {
 
     @Id
@@ -24,5 +26,11 @@ public class Author {
     private String email;
     private LocalDate dob;
     private int noOfBlogs;
+
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @ToString.Exclude
+    private List<Blog> blogs;
+
 
 }
