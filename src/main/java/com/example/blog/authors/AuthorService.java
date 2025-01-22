@@ -55,7 +55,7 @@ public class AuthorService {
             Author author = optional.get();
             return authorMapper(optional.get());
         }else {
-            return  new AuthorResponseDto("N/A","N/A",LocalDate.MIN,-1,new ArrayList<String>());
+            return  new AuthorResponseDto("N/A","N/A",LocalDate.MIN,-1,new ArrayList<>());
         }
     }
 

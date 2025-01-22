@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AuthorRepository extends JpaRepository<Author,Integer> {
-    public List<Author> findByname(String name);
+     List<Author> findByname(String name);
 
-    public Optional<Author> findByemail(@NotNull String s);
+     Optional<Author> findByemail(@NotNull String s);
 }
