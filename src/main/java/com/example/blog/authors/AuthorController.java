@@ -18,11 +18,9 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @PostMapping(path = "/Author")
-    public AuthorDto postAuthor(@Valid @RequestBody AuthorDto authorDto){
-        return authorService.saveAuthor(authorDto);
-    }
+
     @PostMapping(path = "/Authors")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<AuthorDto> postAuthors(@RequestBody List<AuthorDto> authorsDto){
         return authorService.saveAuthors(authorsDto);
     }
@@ -36,6 +34,17 @@ public class AuthorController {
     public AuthorResponseDto getAuthor(@PathVariable Integer AuthorID){
         return authorService.getAuthor(AuthorID);
     }
+    @DeleteMapping(path = "/Authors/{AuthorID}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String deleteAuthor(@PathVariable Integer AuthorID){
+        return authorService.removeAuthor(AuthorID);
+    }
+
+    @PostMapping(path = "/Author")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AuthorDto postAuthor(@Valid @RequestBody AuthorDto authorDto){
+        return authorService.saveAuthor(authorDto);
+    }
 
     @GetMapping(path = "/Author")
     public List<AuthorResponseDto> getAuthorByName(@RequestParam("AuthorName") String author){
@@ -43,10 +52,6 @@ public class AuthorController {
     }
 
 
-    @DeleteMapping(path = "/Authors/{AuthorID}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public String deleteAuthor(@PathVariable Integer AuthorID){
-        return authorService.removeAuthor(AuthorID);
-    }
+
 
 }
