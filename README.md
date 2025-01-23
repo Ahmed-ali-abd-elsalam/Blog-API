@@ -16,7 +16,7 @@ A simple personal Blog API implemented using Spring Boot and PostgreSQL.
 The Blog API is designed to provide a backend service for managing blog posts and Author interactions. It offers endpoints for creating, reading, updating, and deleting blog posts.
 
 ## Database Class Diagram
-
+![database Class diagram](https://github.com/user-attachments/assets/99b08995-4ec8-4adf-bc9f-8d8815570499)
 
 ## Features
 
@@ -39,11 +39,9 @@ The Blog API is designed to provide a backend service for managing blog posts an
 - Maven installed
 - PostgreSQL installed and running
 
-
-
-
 ## API Endpoints
 
+![image](https://github.com/user-attachments/assets/35bdc745-d8f5-45bb-b312-40a80e85592c)
 
 - [POST `/blogs`](#post-blogs)
 - [GET `/blogs`](#get-blogs)
